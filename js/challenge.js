@@ -55,11 +55,21 @@ resume.addEventListener('click', function(){
     enabled = true
     document.body.replaceChild(pause, resume)
 })
+// alternative strategy: clearInterval(count)
+        // - may have to set count to let instead of const?
+    // buttons.disabled = true
+    // e.target.id = 'resume'
+    // e.target.innerText = 'resume'
+        // - resume would have to redo the setInterval function in addition to reversing other conditions.
 const form = document.getElementById('comment-form')
 const comments = document.getElementById('list')
 form.addEventListener('submit', function(e){
     e.preventDefault()
-    const commentTag = document.createElement('p')
-    commentTag.textContent = e.target.querySelector('#comment-input').value
-    comments.appendChild(commentTag)
+    if (enabled === true){
+        const commentTag = document.createElement('p')
+        commentTag.textContent = e.target.querySelector('#comment-input').value
+        // alternative: e.target.parentNode.comment.value
+        comments.appendChild(commentTag)
+        e.target.parentNode.reset()
+    }
 })
