@@ -5,7 +5,6 @@ function incrementSeconds(){
     if (enabled === true){
         seconds += 1
         counter.innerText = seconds
-        numOfLikes = 0
     }
 }
 const count = setInterval(incrementSeconds, 1000)
@@ -16,23 +15,33 @@ const plus = document.getElementById('plus')
 plus.addEventListener('click', function(){
     if (enabled === true){
         seconds += 1
+        counter.innerText = seconds
     }
 })
 const minus = document.getElementById('minus')
 minus.addEventListener('click', function(){
     if (enabled === true){
         seconds -= 1
+        counter.innerText = seconds
     }
 })
 const likes = document.getElementsByClassName('likes')[0]
 const heart = document.getElementById('heart')
-let numOfLikes = 0
+const likeCount = {}
 heart.addEventListener('click', function(){
     if (enabled === true){
-        numOfLikes += 1
-        const likeTag = document.createElement('p')
-        likeTag.textContent = `${seconds} has been liked ${numOfLikes} times.`
-        likes.appendChild(likeTag)
+        if (likeCount[seconds]){
+            const likeTag = document.querySelector(`[data-number='${seconds}']`)
+            likeCount[seconds]++
+            numOfLikes = likeCount[seconds]
+            likeTag.textContent = `${seconds} has been liked ${numOfLikes} times.`
+        } else {
+            likeCount[seconds] = 1
+            const likeTag = document.createElement('p')
+            likeTag.dataset.number = seconds
+            likeTag.textContent = `${seconds} has been liked 1 time.`
+            likes.appendChild(likeTag)
+        }
     }
 })
 const pause = document.getElementById('pause')
