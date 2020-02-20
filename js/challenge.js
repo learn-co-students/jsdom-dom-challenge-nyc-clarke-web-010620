@@ -56,7 +56,7 @@ resume.addEventListener('click', function(){
     document.body.replaceChild(pause, resume)
 })
 // alternative strategy: clearInterval(count)
-        // - may have to set count to let instead of const?
+        // - have to set count with let instead of const
     // buttons.disabled = true
     // e.target.id = 'resume'
     // e.target.innerText = 'resume'
@@ -67,9 +67,8 @@ form.addEventListener('submit', function(e){
     e.preventDefault()
     if (enabled === true){
         const commentTag = document.createElement('p')
-        commentTag.textContent = e.target.querySelector('#comment-input').value
-        // alternative: e.target.parentNode.comment.value
+        commentTag.textContent = e.target.comment.value
         comments.appendChild(commentTag)
-        e.target.parentNode.reset()
+        e.target.reset()
     }
 })
